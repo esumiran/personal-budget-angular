@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from  '@angular/common/http';
-import { Chart }  from 'chart.js';
+import {  Chart, ChartConfiguration }  from 'chart.js';
 
 @Component({
   selector: 'pb-homepage',
@@ -11,7 +11,7 @@ export class HomepageComponent implements OnInit {
 
   chart: any = [];
 
-  public dataSource = {
+  public dataSource: ChartConfiguration['data'] = {
     datasets: [
         {
             data: [],
@@ -34,7 +34,7 @@ export class HomepageComponent implements OnInit {
     .subscribe((res: any): void => {
       for (var i = 0; i < res.myBudget.length; i++) {
         this.dataSource.datasets[0].data[i] = res.myBudget[i].budget;
-        this.dataSource.labels[i] = res.myBudget[i].title;
+        this.dataSource.labels = res.myBudget[i].title;
         this.createChart();
     }
     });
